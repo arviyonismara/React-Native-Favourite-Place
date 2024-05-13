@@ -7,8 +7,27 @@ import AddPlace from "./screens/AddPlace";
 import IconButton from "./components/UI/IconButton";
 import { Colors } from "./constants/colors";
 import Map from "./screens/Map";
+import { useEffect, useState } from "react";
+import { init } from "./components/util/database";
+import AppLoading from "expo-app-loading";
+import PlaceDetails from "./screens/PlaceDetails";
 
 export default function App() {
+  const [dbInitialized, setDbInitialized] = useState(false);
+
+  // inisialisasi database
+  useEffect(() => {
+    init()
+      .then(() => {
+        setDbInitialized(true);
+      })
+      .catch((err) => console.log(err)); // init diambil dari file database
+  }, []);
+
+  if (!dbInitialized) {
+    return <AppLoading />;
+  }
+
   const Stack = createNativeStackNavigator();
 
   return (
@@ -46,6 +65,13 @@ export default function App() {
             }}
           />
           <Stack.Screen name="Map" component={Map} />
+          <Stack.Screen
+            name="PlaceDetails"
+            component={PlaceDetails}
+            options={{
+              title: "Loading place details",
+            }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </>

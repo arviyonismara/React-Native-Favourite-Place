@@ -1,10 +1,11 @@
 // place berisi data
-class Place {
-  constructor(title, imageUri, address, location) {
+// class Place akan dipanggil di file placeform.js
+export class Place {
+  constructor(title, imageUri, location, id) {
     this.title = title;
     this.imageUri = imageUri;
-    this.address = address;
-    this.location = location; // { lat: 0.141241, lng: 127.121 }
-    this.id = new Date().toString() + Math.random().toString();
+    this.address = location.address;
+    this.location = { lat: location.lat, lng: location.lng }; // { lat: 0.141241, lng: 127.121 }
+    this.id = id;
   }
 }

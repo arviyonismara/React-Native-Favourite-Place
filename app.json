@@ -29,7 +29,8 @@
         {
           "cameraPermission": "The app accesses your camera so you can take awesome pictures of your favourite places!"
         }
-      ]
+      ],
+      "expo-asset"
     ]
   }
 }

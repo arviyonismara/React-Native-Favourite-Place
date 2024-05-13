@@ -4,10 +4,11 @@ import { Colors } from "../../constants/colors";
 import ImagePicker from "./ImagePicker";
 import LocationPicker from "./LocationPicker";
 import Button from "../UI/Button";
+import { Place } from "../../model/place";
 
 // form untuk tambah data
 // form ini akan dipanggil di file AddPlace.js
-const PlaceForm = () => {
+const PlaceForm = ({ onCreatePlace }) => {
   const [enteredTitle, setEnteredTitle] = useState();
 
   // state untuk submit data image dan location
@@ -27,9 +28,12 @@ const PlaceForm = () => {
   }, []);
 
   function savePlaceHandler() {
-    console.log(enteredTitle);
-    console.log(selectedImage);
-    console.log(pickedLocation);
+    // Place didapatkan dari file class model Place.js
+    const placeData = new Place(enteredTitle, selectedImage, pickedLocation);
+    onCreatePlace(placeData);
+    // console.log(enteredTitle);
+    // console.log(selectedImage);
+    // console.log(pickedLocation);
   }
 
   return (
